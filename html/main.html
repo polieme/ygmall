@@ -419,10 +419,151 @@
 </div>
 
 
+<!--这块是文件上传的代码-->
+<div style="margin: 35px 0;">
+    <h1>Uploader-文件上传</h1>
+</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">图片上传</p>
+                    <div class="weui-uploader__info">0/2</div>
+                </div>
+                <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files" id="uploaderFiles">
+                        <li class="weui-uploader__file" style="background-image:url(../images/pic_160.png) "></li>
+                        <li class="weui-uploader__file" style="background-image:url(../images/pic_160.png) "></li>
+                        <li class="weui-uploader__file" style="background-image:url(../images/pic_160.png) "></li>
+                        <li class="weui-uploader__file weui-uploader__file_status" style="background-image: url(../images/pic_160.png)">
+                            <div class="weui-uploader__file-content">
+                                <i class="weui-icon-warn"></i>
+                            </div>
+                        </li>
+                        <li class="weui-uploader__file weui-uploader__file_status" style="background-image: url(../images/pic_160.png)">
+                            <div class="weui-uploader__file-content">50%</div>
+                        </li>
+                    </ul>
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--这块是全屏预览图片，因为是全屏展示，所以增加了一个按钮，上面的点击事件是用来显示全屏图片的-->
+<div style="margin:35px 0" >
+    <h1>Gallery-全屏预览图片</h1>
+</div>
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="showImgBtn">显示全屏图片</a>
+</div>
+
+<div class="weui-gallery" style="display: none" id="imgfullscreen">
+    <span class="weui-gallery__img" style="background-image: url(../images/pic_160.png)"></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:void(0);" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
+
+<!--滑块代码，下面还有段JS初始化代码及回调-->
+<div style="margin: 35px 0;">
+    <h1>Slider-滑块</h1>
+</div>
+<div class="weui-slider-box" id="slider1">
+    <div class="weui-slider">
+        <div class="weui-slider__inner">
+            <div class="weui-slider__track" style="width: 30%"></div>
+            <div class="weui-slider__handler" style="left: 30%"></div>
+        </div>
+    </div>
+    <div id="sliderValue" class="weui-slider-box__value">75%</div>
+</div>
+
+<!--这块是消息页面代码-->
+<div style="margin: 35px 0;">
+    <h1>消息界面</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="msg.html">打开消息界面</a>
+</div>
+
+<!--这块是进度（progress）条代码-->
+<div style="margin: 35px 0">
+    <h1>Progress-进度条</h1>
+</div>
+<div class="weui-progress">
+    <div class="weui-progress__bar">
+        <div class="weui-progress__inner-bar js_progress" style="width: 50%"></div>
+    </div>
+    <a class="weui-progress__opr" href="javascript:void(0);">
+        <i class="weui-icon-cancel"></i>
+    </a>
+</div>
+<br>
+<div class="weui-progress">
+    <div class="weui-progress__bar">
+        <div class="weui-progress__inner-bar" style="width: 80%"></div>
+    </div>
+    <a class="weui-progress__opr" href="javascript:void(0);">
+        <li class="weui-icon-cancel"></li>
+    </a>
+</div>
+
+
+
+
+
 
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery-weui.min.js"></script>
 
+<!--初始化加载-->
+<script>
+$(function(){
+
+//    Gallery点击按钮显示全屏查看图片
+    $('#showImgBtn').on('click',function(){
+        $('#imgfullscreen')[0].style.display = 'block';
+    });
+
+//    Gallery点击图片之后，全屏效果消失
+    $('#imgfullscreen').on('click',function(){
+        $('#imgfullscreen')[0].style.display = 'none';
+    });
+});
+
+</script>
+
+<!--点击跳转之后，返回回来，还能回到当时母页面的位置-->
+<script>
+    $(window).scroll(function(){
+        if($(document).scrollTop()!=0){
+            sessionStorage.setItem("offsetTop",$(document).scrollTop());//保存滚动条位置
+        }
+    });
+
+    window.onload = function () {
+        var offsetTop = sessionStorage.getItem("offsetTop");
+        $(document).scrollTop(offsetTop);
+    }
+</script>
+
+
+
+
+<!--Slider-滑块的JS代码-->
+<script>
+    $("#slider1").slider(function(percent){
+        console.log(percent);
+    });
+</script>
 </body>
 </html>
