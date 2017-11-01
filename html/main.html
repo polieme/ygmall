@@ -575,6 +575,33 @@
     <div class="weui-flex__item">
         <a class="weui-btn weui-btn_primary" id="modalWindow">显示自定义对话框</a>
     </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="closeModal">自定义按钮关闭</a>
+    </div>
+</div>
+
+<!--这块是Loadmore的代码-->
+<div style="margin: 35px 0">
+    <h1>Loadmore</h1>
+</div>
+<div class="weui-loadmore">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips">加载中...</span>
+</div>
+<div class="weui-loadmore weui-loadmore_line">
+    <span class="weui-loadmore__tips">暂无数据</span>
+</div>
+<div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+    <span class="weui-loadmore__tips"></span>
+</div>
+
+<!--这块是Action Sheet的代码-->
+<div style="margin: 35px 0;">
+    <h1>Action Sheet</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="actionSheetBtn">显示ActionSheet</a>
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="actionSheetBkgBtn">自定义背景的ActionSheet</a>
 </div>
 
 
@@ -736,9 +763,44 @@ $(function(){
             }]
         });
     });
+    //自定义关闭Modal窗口
+    $("#closeModal").on('click', function () {
+        $.modal({
+            title: "自定义的标题",
+            text: "自定义的内容",
+            buttons: [{
+                text: "关闭", onClick: function () {
+                    $.closeModal();
+                    $.alert("这个是点击关闭按钮的回调");
+                }
+            }]
+        })
+    });
 
-
-
+//ActionSheet JS事件
+    $("#actionSheetBtn").on('click', function () {
+        $.actions(
+            {
+                actions: [{
+                    text: "自定义按钮一", onClick: function () {
+                        $.alert("点击了自定义按钮一");
+                    }
+                },{
+                    text:"自定义按钮二",onClick:function(){
+                        $.alert("点击了第二个按钮");
+                    }
+                }]
+            })
+    })
+    $("#actionSheetBkgBtn").on('click', function () {
+        $.actions({
+            actions:[{text:"第一个自定义按钮",onClick:function(){
+                $.alert("点击了第一个按钮");
+            }},{text:"第二个按钮",onClick:function(){
+                $.alert("点击了第二个按钮");
+            }}]
+        })
+    })
 
 
 
