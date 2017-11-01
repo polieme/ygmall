@@ -509,16 +509,73 @@
 <br>
 <div class="weui-progress">
     <div class="weui-progress__bar">
-        <div class="weui-progress__inner-bar" style="width: 80%"></div>
+        <div class="weui-progress__inner-bar js_progress" style="width: 80%"></div>
     </div>
     <a class="weui-progress__opr" href="javascript:void(0);">
         <li class="weui-icon-cancel"></li>
     </a>
 </div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="uploadProgressBtn">上传</a>
+</div>
 
+<div style="margin: 35px 0;">
+    <h1>对话框</h1>
+</div>
+<div class="weui-flex" style="margin: 5px 0;">
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="alertBtn1">Alert</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="alertBtn2">Alert</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="alertBtn3">Alert</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="alertBtn4">Alert</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="alertBtn5">Alert</a>
+    </div>
+</div>
+<div class="weui-flex" style="margin: 5px 0;">
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="confirmBtn1">confirm</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="confirmBtn2">confirm</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="confirmBtn3">confirm</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="confirmBtn4">confirm</a>
+    </div>
+</div>
+<div class="weui-flex" style="margin: 5px 0;">
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="prompt1">Prompt</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="prompt2">Prompt</a>
+    </div>
+</div>
 
+<div class="weui-flex" style="margin: 5px 0;">
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="loginPrompt1">显示登录弹窗</a>
+    </div>
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="loginPrompt2">显示登录弹窗</a>
+    </div>
+</div>
 
-
+<div class="weui-flex" style="margin: 5px 0;">
+    <div class="weui-flex__item">
+        <a class="weui-btn weui-btn_primary" id="modalWindow">显示自定义对话框</a>
+    </div>
+</div>
 
 
 
@@ -538,6 +595,156 @@ $(function(){
     $('#imgfullscreen').on('click',function(){
         $('#imgfullscreen')[0].style.display = 'none';
     });
+
+    //Progress-进度条的按钮
+    var $progress = $('.js_progress');
+    var progress = 0;
+    $("#uploadProgressBtn").on('click',function(){
+        if($("#uploadProgressBtn").hasClass("weui-btn_disabled")) return;
+        $("#uploadProgressBtn").addClass("weui-btn_disabled");
+        next();
+    })
+
+    function next() {
+        if(progress > 100){
+            progress = 0;
+            $("#uploadProgressBtn").removeClass('weui-btn_disabled');
+            $(".weui-icon-cancel").removeClass("weui-icon-cancel").addClass("weui-icon-success");
+            return;
+        }
+        $progress.css({width: progress + '%'});
+        progress = ++progress;
+        setTimeout(next, 20);
+    }
+
+
+    //alert按钮操作
+    $("#alertBtn1").on('click',function () {
+        $.alert("自定义内容");
+    });
+    $("#alertBtn2").on('click',function () {
+        $.alert("自定义内容","自定义的标题");
+    });
+    $("#alertBtn3").on('click',function () {
+        $.alert({
+            title: '自定义的标题',
+            text: '自定义的内容',
+            onOK: function () {
+                //点击确认
+                $.alert("这个是有回调的alert");
+            }
+        });
+    });
+    $("#alertBtn4").on('click',function () {
+        $.alert("自定义内容",function(){
+            $.alert("这个也是有回调的");
+        });
+    });
+    $("#alertBtn5").on('click',function(){
+        $.alert("自定义内容","自定义标题",function () {
+            $.alert("这个是自定义内容和标题和有回调的alert");
+        })
+    })
+    //confirm按钮操作
+    $("#confirmBtn1").on('click',function(){
+        $.confirm("自定义内容的");
+    });
+    $("#confirmBtn2").on('click',function(){
+        $.confirm("自定义内容的","自定义标题的");
+    });
+    $("#confirmBtn3").on('click',function(){
+        $.confirm("自定义内容",function(){
+            $.alert("点击确定的回调")
+        }),function(){
+            $.alert("点击取消的回调");//这个不知道为什么好像不好使
+        }
+    });
+    $("#confirmBtn4").on('click',function(){
+        $.confirm({
+            title:"自定义标题",
+            text:"自定义内容",
+            onOK:function(){
+                $.alert("点击确定的回调");
+            },
+            onCancel:function(){
+                $.alert("点击取消的回调");
+            }
+        });
+    });
+    //prompt按钮事件
+    $("#prompt1").on('click',function(){
+        $.prompt("自定义的内容",function(text){
+            $.alert(text);
+        },function(){
+            $.alert("这个是取消回调走的方法");
+        })
+    });
+    $("#prompt2").on('click',function(){
+        $.prompt({
+            title:"自定义的标题",
+            text:"自定义的内容",
+            input:"请输入你想输入的内容",
+            empty:false,
+            onOK:function(input){
+                $.alert("你输入的内容是"+input);
+            },
+            onCancel:function(){
+                $.alert("这个是点击取消的时候的回调");
+            }
+        })
+    })
+    //登录弹出窗口
+    $("#loginPrompt1").on('click',function(){
+        $.login("自定义消息",function(username,password){
+            $.alert("您输入的用户名："+username+"<br>您输入的密码是："+password);
+        },function () {
+            $.alert("点击取消的时候弹出");
+        });
+    });
+    $("#loginPrompt2").on('click',function(){
+        $.login({
+            title:"自定义的标题",
+            text:"自定义的内容",
+            username:"polieme",/*默认的用户名*/
+            password:"zhangpeng",/*默认的密码*/
+            onOK:function(username,password){
+                $.alert("您输入的用户名是:"+username+"<br>您输入的密码是:"+password);
+            },
+            onCancel:function(){
+                $.alert("这个是点击取消的时候");
+            }
+
+        });
+    });
+    //自定义弹出窗口
+    $("#modalWindow").on('click', function () {
+        $.modal({
+            title: "自定义标题",
+            text: "自定义内容",
+            buttons: [{
+                text: "支付宝", onClick: function () {
+                    $.alert("点击了支付宝按钮")
+                }
+            }, {
+                text: "微信", onClick: function () {
+                    $.alert("点击了微信支付");
+                }
+            }, {
+                text: "其他", onClick: function () {
+                    $.alert("点击了其他按钮");
+                }
+            }]
+        });
+    });
+
+
+
+
+
+
+
+
+
 });
 
 </script>
