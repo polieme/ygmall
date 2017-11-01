@@ -21,7 +21,7 @@
             color: #cfcfcf;
         }
 
-        h1{
+        h1 {
             font-weight: 400;
             text-align: center;
             color: #0bb20c;
@@ -247,7 +247,7 @@
     </label>
     <label class="weui-cell weui-check__label" for="s12">
         <div class="weui-cell__hd">
-            <input type="checkbox" name="checkbox1" class="weui-check" id="s12" >
+            <input type="checkbox" name="checkbox1" class="weui-check" id="s12">
             <i class="weui-icon-checked"></i>
         </div>
         <div class="weui-cell__bd">
@@ -436,12 +436,14 @@
                         <li class="weui-uploader__file" style="background-image:url(../images/pic_160.png) "></li>
                         <li class="weui-uploader__file" style="background-image:url(../images/pic_160.png) "></li>
                         <li class="weui-uploader__file" style="background-image:url(../images/pic_160.png) "></li>
-                        <li class="weui-uploader__file weui-uploader__file_status" style="background-image: url(../images/pic_160.png)">
+                        <li class="weui-uploader__file weui-uploader__file_status"
+                            style="background-image: url(../images/pic_160.png)">
                             <div class="weui-uploader__file-content">
                                 <i class="weui-icon-warn"></i>
                             </div>
                         </li>
-                        <li class="weui-uploader__file weui-uploader__file_status" style="background-image: url(../images/pic_160.png)">
+                        <li class="weui-uploader__file weui-uploader__file_status"
+                            style="background-image: url(../images/pic_160.png)">
                             <div class="weui-uploader__file-content">50%</div>
                         </li>
                     </ul>
@@ -455,7 +457,7 @@
 </div>
 
 <!--这块是全屏预览图片，因为是全屏展示，所以增加了一个按钮，上面的点击事件是用来显示全屏图片的-->
-<div style="margin:35px 0" >
+<div style="margin:35px 0">
     <h1>Gallery-全屏预览图片</h1>
 </div>
 
@@ -604,6 +606,41 @@
     <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="actionSheetBkgBtn">自定义背景的ActionSheet</a>
 </div>
 
+<!--这块是Toast的代码-->
+<div style="margin: 35px 0">
+    <h1>Toast显示临时信息</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="toastSuccess">显示Toast成功</a>
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="toastCancel">显示Toast取消</a>
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="toastForbidden">显示Toast禁止</a>
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="toastText">显示纯文本</a>
+    <a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="toastLoading">显示Loading</a>
+</div>
+<!--这块是loading加载的时候显示的DIV，配合toast的loading使用的-->
+<div id="loadingToast" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast" style="visibility: visible;opacity: 1">
+        <i class="weui-loading weui-icon_toast"></i>
+        <p class="weui-toast__content">数据加载中</p>
+    </div>
+</div>
+
+<div style="margin: 35px 0;">
+    <h1>Toptip-顶部提示</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary weui-btn_mini" id="toptipSuccess">显示成功</a>
+    <a class="weui-btn weui-btn_warn weui-btn_mini" id="toptipFail">显示失败</a>
+    <a class="weui-btn weui-btn_warn weui-btn_mini" id="toptipWarn">显示警告</a>
+</div>
+
+<div style="margin: 35px 0">
+    <h1>Tabbar-导航栏</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="tabbar.html">跳转到导航栏界面</a>
+</div>
 
 
 <script src="../js/jquery.min.js"></script>
@@ -611,207 +648,255 @@
 
 <!--初始化加载-->
 <script>
-$(function(){
+    $(function () {
 
 //    Gallery点击按钮显示全屏查看图片
-    $('#showImgBtn').on('click',function(){
-        $('#imgfullscreen')[0].style.display = 'block';
-    });
+        $('#showImgBtn').on('click', function () {
+            $('#imgfullscreen')[0].style.display = 'block';
+        });
 
 //    Gallery点击图片之后，全屏效果消失
-    $('#imgfullscreen').on('click',function(){
-        $('#imgfullscreen')[0].style.display = 'none';
-    });
+        $('#imgfullscreen').on('click', function () {
+            $('#imgfullscreen')[0].style.display = 'none';
+        });
 
-    //Progress-进度条的按钮
-    var $progress = $('.js_progress');
-    var progress = 0;
-    $("#uploadProgressBtn").on('click',function(){
-        if($("#uploadProgressBtn").hasClass("weui-btn_disabled")) return;
-        $("#uploadProgressBtn").addClass("weui-btn_disabled");
-        next();
-    })
+        //Progress-进度条的按钮
+        var $progress = $('.js_progress');
+        var progress = 0;
+        $("#uploadProgressBtn").on('click', function () {
+            if ($("#uploadProgressBtn").hasClass("weui-btn_disabled")) return;
+            $("#uploadProgressBtn").addClass("weui-btn_disabled");
+            next();
+        })
 
-    function next() {
-        if(progress > 100){
-            progress = 0;
-            $("#uploadProgressBtn").removeClass('weui-btn_disabled');
-            $(".weui-icon-cancel").removeClass("weui-icon-cancel").addClass("weui-icon-success");
-            return;
+        function next() {
+            if (progress > 100) {
+                progress = 0;
+                $("#uploadProgressBtn").removeClass('weui-btn_disabled');
+                $(".weui-icon-cancel").removeClass("weui-icon-cancel").addClass("weui-icon-success");
+                return;
+            }
+            $progress.css({width: progress + '%'});
+            progress = ++progress;
+            setTimeout(next, 20);
         }
-        $progress.css({width: progress + '%'});
-        progress = ++progress;
-        setTimeout(next, 20);
-    }
 
 
-    //alert按钮操作
-    $("#alertBtn1").on('click',function () {
-        $.alert("自定义内容");
-    });
-    $("#alertBtn2").on('click',function () {
-        $.alert("自定义内容","自定义的标题");
-    });
-    $("#alertBtn3").on('click',function () {
-        $.alert({
-            title: '自定义的标题',
-            text: '自定义的内容',
-            onOK: function () {
-                //点击确认
-                $.alert("这个是有回调的alert");
-            }
+        //alert按钮操作
+        $("#alertBtn1").on('click', function () {
+            $.alert("自定义内容");
         });
-    });
-    $("#alertBtn4").on('click',function () {
-        $.alert("自定义内容",function(){
-            $.alert("这个也是有回调的");
+        $("#alertBtn2").on('click', function () {
+            $.alert("自定义内容", "自定义的标题");
         });
-    });
-    $("#alertBtn5").on('click',function(){
-        $.alert("自定义内容","自定义标题",function () {
-            $.alert("这个是自定义内容和标题和有回调的alert");
+        $("#alertBtn3").on('click', function () {
+            $.alert({
+                title: '自定义的标题',
+                text: '自定义的内容',
+                onOK: function () {
+                    //点击确认
+                    $.alert("这个是有回调的alert");
+                }
+            });
+        });
+        $("#alertBtn4").on('click', function () {
+            $.alert("自定义内容", function () {
+                $.alert("这个也是有回调的");
+            });
+        });
+        $("#alertBtn5").on('click', function () {
+            $.alert("自定义内容", "自定义标题", function () {
+                $.alert("这个是自定义内容和标题和有回调的alert");
+            })
         })
-    })
-    //confirm按钮操作
-    $("#confirmBtn1").on('click',function(){
-        $.confirm("自定义内容的");
-    });
-    $("#confirmBtn2").on('click',function(){
-        $.confirm("自定义内容的","自定义标题的");
-    });
-    $("#confirmBtn3").on('click',function(){
-        $.confirm("自定义内容",function(){
-            $.alert("点击确定的回调")
-        }),function(){
-            $.alert("点击取消的回调");//这个不知道为什么好像不好使
-        }
-    });
-    $("#confirmBtn4").on('click',function(){
-        $.confirm({
-            title:"自定义标题",
-            text:"自定义内容",
-            onOK:function(){
-                $.alert("点击确定的回调");
-            },
-            onCancel:function(){
-                $.alert("点击取消的回调");
+        //confirm按钮操作
+        $("#confirmBtn1").on('click', function () {
+            $.confirm("自定义内容的");
+        });
+        $("#confirmBtn2").on('click', function () {
+            $.confirm("自定义内容的", "自定义标题的");
+        });
+        $("#confirmBtn3").on('click', function () {
+            $.confirm("自定义内容", function () {
+                $.alert("点击确定的回调")
+            }), function () {
+                $.alert("点击取消的回调");//这个不知道为什么好像不好使
             }
         });
-    });
-    //prompt按钮事件
-    $("#prompt1").on('click',function(){
-        $.prompt("自定义的内容",function(text){
-            $.alert(text);
-        },function(){
-            $.alert("这个是取消回调走的方法");
-        })
-    });
-    $("#prompt2").on('click',function(){
-        $.prompt({
-            title:"自定义的标题",
-            text:"自定义的内容",
-            input:"请输入你想输入的内容",
-            empty:false,
-            onOK:function(input){
-                $.alert("你输入的内容是"+input);
-            },
-            onCancel:function(){
-                $.alert("这个是点击取消的时候的回调");
-            }
-        })
-    })
-    //登录弹出窗口
-    $("#loginPrompt1").on('click',function(){
-        $.login("自定义消息",function(username,password){
-            $.alert("您输入的用户名："+username+"<br>您输入的密码是："+password);
-        },function () {
-            $.alert("点击取消的时候弹出");
+        $("#confirmBtn4").on('click', function () {
+            $.confirm({
+                title: "自定义标题",
+                text: "自定义内容",
+                onOK: function () {
+                    $.alert("点击确定的回调");
+                },
+                onCancel: function () {
+                    $.alert("点击取消的回调");
+                }
+            });
         });
-    });
-    $("#loginPrompt2").on('click',function(){
-        $.login({
-            title:"自定义的标题",
-            text:"自定义的内容",
-            username:"polieme",/*默认的用户名*/
-            password:"zhangpeng",/*默认的密码*/
-            onOK:function(username,password){
-                $.alert("您输入的用户名是:"+username+"<br>您输入的密码是:"+password);
-            },
-            onCancel:function(){
-                $.alert("这个是点击取消的时候");
-            }
+        //prompt按钮事件
+        $("#prompt1").on('click', function () {
+            $.prompt("自定义的内容", function (text) {
+                $.alert(text);
+            }, function () {
+                $.alert("这个是取消回调走的方法");
+            })
+        });
+        $("#prompt2").on('click', function () {
+            $.prompt({
+                title: "自定义的标题",
+                text: "自定义的内容",
+                input: "请输入你想输入的内容",
+                empty: false,
+                onOK: function (input) {
+                    $.alert("你输入的内容是" + input);
+                },
+                onCancel: function () {
+                    $.alert("这个是点击取消的时候的回调");
+                }
+            })
+        })
+        //登录弹出窗口
+        $("#loginPrompt1").on('click', function () {
+            $.login("自定义消息", function (username, password) {
+                $.alert("您输入的用户名：" + username + "<br>您输入的密码是：" + password);
+            }, function () {
+                $.alert("点击取消的时候弹出");
+            });
+        });
+        $("#loginPrompt2").on('click', function () {
+            $.login({
+                title: "自定义的标题",
+                text: "自定义的内容",
+                username: "polieme", /*默认的用户名*/
+                password: "zhangpeng", /*默认的密码*/
+                onOK: function (username, password) {
+                    $.alert("您输入的用户名是:" + username + "<br>您输入的密码是:" + password);
+                },
+                onCancel: function () {
+                    $.alert("这个是点击取消的时候");
+                }
 
+            });
         });
-    });
-    //自定义弹出窗口
-    $("#modalWindow").on('click', function () {
-        $.modal({
-            title: "自定义标题",
-            text: "自定义内容",
-            buttons: [{
-                text: "支付宝", onClick: function () {
-                    $.alert("点击了支付宝按钮")
-                }
-            }, {
-                text: "微信", onClick: function () {
-                    $.alert("点击了微信支付");
-                }
-            }, {
-                text: "其他", onClick: function () {
-                    $.alert("点击了其他按钮");
-                }
-            }]
-        });
-    });
-    //自定义关闭Modal窗口
-    $("#closeModal").on('click', function () {
-        $.modal({
-            title: "自定义的标题",
-            text: "自定义的内容",
-            buttons: [{
-                text: "关闭", onClick: function () {
-                    $.closeModal();
-                    $.alert("这个是点击关闭按钮的回调");
-                }
-            }]
-        })
-    });
-
-//ActionSheet JS事件
-    $("#actionSheetBtn").on('click', function () {
-        $.actions(
-            {
-                actions: [{
-                    text: "自定义按钮一", onClick: function () {
-                        $.alert("点击了自定义按钮一");
+        //自定义弹出窗口
+        $("#modalWindow").on('click', function () {
+            $.modal({
+                title: "自定义标题",
+                text: "自定义内容",
+                buttons: [{
+                    text: "支付宝", onClick: function () {
+                        $.alert("点击了支付宝按钮")
                     }
-                },{
-                    text:"自定义按钮二",onClick:function(){
-                        $.alert("点击了第二个按钮");
+                }, {
+                    text: "微信", onClick: function () {
+                        $.alert("点击了微信支付");
+                    }
+                }, {
+                    text: "其他", onClick: function () {
+                        $.alert("点击了其他按钮");
+                    }
+                }]
+            });
+        });
+        //自定义关闭Modal窗口
+        $("#closeModal").on('click', function () {
+            $.modal({
+                title: "自定义的标题",
+                text: "自定义的内容",
+                buttons: [{
+                    text: "关闭", onClick: function () {
+                        $.closeModal();
+                        $.alert("这个是点击关闭按钮的回调");
                     }
                 }]
             })
-    })
-    $("#actionSheetBkgBtn").on('click', function () {
-        $.actions({
-            actions:[{text:"自定义菜单一"}]
+        });
+
+        //ActionSheet JS事件
+        $("#actionSheetBtn").on('click', function () {
+            $.actions(
+                {
+                    actions: [{
+                        text: "自定义按钮一", onClick: function () {
+                            $.alert("点击了自定义按钮一");
+                        }
+                    }, {
+                        text: "自定义按钮二", onClick: function () {
+                            $.alert("点击了第二个按钮");
+                        }
+                    }]
+                })
         })
-    })
+        $("#actionSheetBkgBtn").on('click', function () {
+            $.actions({
+                actions: [{
+                    text: "自定义菜单一", className: "color-primary", onClick: function () {
+                        $.alert("点击了自定义菜单一");
+                    }
+                }, {
+                    text: "自定义菜单二", className: "color-success", onClick: function () {
+                        $.alert("点击了自定义菜单二");
+                    }
+                }, {
+                    text: "自定义菜单三", className: "color-danger", onClick: function () {
+                        $.alert("点击了自定义菜单三");
+                    }
+                }, {
+                    text: "自定义菜单四", className: "color-warning", onClick: function () {
+                        $.alert("点击了自定义菜单四");
+                    }
+                }
+                ]
+            })
+        })
+
+        //Toast的JS代码
+        $("#toastSuccess").on('click', function () {
+            $.toast("操作成功");
+        });
+        $("#toastCancel").on('click', function () {
+            $.toast("取消操作", "cancel");
+        })
+        $("#toastForbidden").on('click', function () {
+            $.toast("禁止操作", "forbidden")
+        })
+        $("#toastText").on('click', function () {
+            $.toast.prototype.defaults.duration = 5000;//可以通过这个参数设置显示的时长
+            $.toast("显示纯文本内容", "text")
+        })
+        $("#toastLoading").on('click', function () {
+            var $loadingToast = $('#loadingToast');
+            if ($loadingToast.css('display') != 'none') return;
 
 
+            $loadingToast.fadeIn(1000);
+            setTimeout(function () {
+                $loadingToast.fadeOut(1000);
+            }, 2000);
+        })
 
+        //Toptip的JS代码
+        $("#toptipSuccess").on('click',function(){
+            $.toptip("操作成功","success");
+        })
+        $("#toptipFail").on('click',function () {
+            $.toptip("操作失败","error");
+        })
+        $("#toptipWarn").on('click',function(){
+            $.toptip("警告",2000,"warning");//可以设置toptip的显示时间
+        })
 
-
-
-});
+    });
 
 </script>
 
 <!--点击跳转之后，返回回来，还能回到当时母页面的位置-->
 <script>
-    $(window).scroll(function(){
-        if($(document).scrollTop()!=0){
-            sessionStorage.setItem("offsetTop",$(document).scrollTop());//保存滚动条位置
+    $(window).scroll(function () {
+        if ($(document).scrollTop() != 0) {
+            sessionStorage.setItem("offsetTop", $(document).scrollTop());//保存滚动条位置
         }
     });
 
@@ -822,11 +907,9 @@ $(function(){
 </script>
 
 
-
-
 <!--Slider-滑块的JS代码-->
 <script>
-    $("#slider1").slider(function(percent){
+    $("#slider1").slider(function (percent) {
         console.log(percent);
     });
 </script>
