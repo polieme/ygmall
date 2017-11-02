@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 这个地方必须得引入，否则会出现页面可缩放的问题-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+    <!-- weui的相关css样式，需要引入-->
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.min.css">
+</head>
+<body>
+<div class="weui-tab">
+    <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+            选项一
+        </a>
+        <a class="weui-navbar__item" href="#tab2">
+            选项二
+        </a>
+        <a class="weui-navbar__item" href="#tab3">
+            选项三
+        </a>
+    </div>
+    <div class="weui-tab__bd">
+        <div class="weui-tab__bd-item weui-tab__bd-item--active" id="tab1">
+            <h1>选项一</h1>
+        </div>
+        <div class="weui-tab__bd-item" id="tab2">
+            <h1>选项二</h1>
+        </div>
+        <div class="weui-tab__bd-item" id="tab3">
+            <h1>选项三</h1>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-weui.min.js"></script>
+</body>
+</html>
