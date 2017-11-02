@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 这个地方必须得引入，否则会出现页面可缩放的问题-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>RefreshByPullDown</title>
+    <!-- weui的相关css样式，需要引入-->
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.min.css">
+</head>
+<body>
+<!-- body 顶部加上如下代码 -->
+<div class="weui-pull-to-refresh__layer">
+    <div class='weui-pull-to-refresh__arrow'></div>
+    <div class='weui-pull-to-refresh__preloader'></div>
+    <div class="down">下拉刷新</div>
+    <div class="up">释放刷新</div>
+    <div class="refresh">正在刷新</div>
+</div>
+<div style="text-align: center">
+    <h1>下拉刷新</h1>
+</div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-weui.min.js"></script>
+<script>
+    $(document.body).pullToRefresh();
+
+    $(document.body).on("pull-to-refresh", function () {
+        setTimeout(function () {
+            $(document.body).pullToRefreshDone();
+        }, 2000);
+    });
+
+
+</script>
+</body>
+</html>
