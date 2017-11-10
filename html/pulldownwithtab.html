@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,12 +10,9 @@
 </head>
 <body>
 
-<div style="margin: 35px 0;font-weight: 400;text-align: center">
-    <h1>下拉刷新配合TAB</h1>
-</div>
 <div class="weui-tab">
     <div class="weui-navbar">
-        <div class="weui-navbar__item weui-bar__item--on" href="#tab1">
+        <div class="weui-navbar__item weui-navbar__item--on weui-bar__item--on" href="#tab1">
             选项一
         </div>
         <div class="weui-navbar__item" href="#tab2">
@@ -36,9 +32,68 @@
                 <div class="up">释放刷新</div>
                 <div class="refresh">正在刷新</div>
             </div>
-            <h1 class="doc-head"></h1>
+            <h1 class="doc-head">页面一</h1>
             <div class="content-padded">
-                。。。
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+            </div>
+        </div>
+        <div class="weui-tab__bd-item weui-pull-to-refresh" id="tab2">
+            <div class="weui-pull-to-refresh__layer">
+                <div class="weui-pull-to-refresh__arrow"></div>
+                <div class="weui-pull-to-refresh__preloader"></div>
+                <div class="down">下拉刷新</div>
+                <div class="up">释放刷新</div>
+                <div class="refresh">正在刷新</div>
+            </div>
+            <h1 class="doc-head">页面二</h1>
+            <div class="content-padded">
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+            </div>
+        </div>
+        <div class="weui-tab__bd-item weui-pull-to-refresh" id="tab3">
+            <div class="weui-pull-to-refresh__layer">
+                <div class="weui-pull-to-refresh__arrow"></div>
+                <div class="weui-pull-to-refresh__preloader"></div>
+                <div class="down">下拉刷新</div>
+                <div class="up">释放刷新</div>
+                <div class="refresh">正在刷新</div>
+            </div>
+            <h1 class="doc-head">页面三</h1>
+            <div class="content-padded">
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
+                <p>jQuery API - jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML
+                    document traversal and manipulation, event handling, animation, and Ajax much simpler with an
+                    easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend
+                    that you check out the jQuery Learning Center.</p>
             </div>
         </div>
     </div>
@@ -48,5 +103,14 @@
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery-weui.min.js"></script>
+<script>
+
+    $('.weui-tab__bd-item').pullToRefresh().on('pull-to-refresh', function (done) {
+        var self = this
+        setTimeout(function () {
+            $(self).pullToRefreshDone();
+        }, 2000)
+    })
+</script>
 </body>
 </html>
