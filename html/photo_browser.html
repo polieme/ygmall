@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 这个地方必须得引入，否则会出现页面可缩放的问题-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Photo Browser</title>
+    <!-- weui的相关css样式，需要引入-->
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.min.css">
+</head>
+<body>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-weui.min.js"></script>
+<script src="../js/swiper.min.js"></script>
+<script>
+    var photoBrowser = $.photoBrowser({
+        items: [{
+            image: "../images/swiper/swiper-1.jpg",
+            caption: "描述文案1"
+        }, {
+            image: "../images/swiper/swiper-2.jpg",
+            caption: "描述文案2"
+        }, {
+            image: "../images/swiper/swiper-3.jpg",
+            caption: "描述文案3"
+        }]
+    });
+    photoBrowser.open();
+
+
+</script>
+</body>
+</html>
