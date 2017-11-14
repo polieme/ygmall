@@ -16,6 +16,16 @@
 <script src="../js/jquery-weui.min.js"></script>
 <script src="../js/swiper.min.js"></script>
 <script>
+
+    /*
+    * open(index)	打开图片浏览器，可以传入一个可选的 index 参数来指定打开后默认显示的图片(从0开始)
+      close()	关闭图片浏览器
+      slideTo(index, duration)	滚动到指定图片
+      slidePrev()	滚动到上一张图片
+      slideNext()	滚动到下一张图片
+      activeIndex	当前显示的图片
+      currentScale	当前缩放比例
+    * */
     var photoBrowser = $.photoBrowser({
         items: [{
             image: "../images/swiper/swiper-1.jpg",
@@ -26,9 +36,22 @@
         }, {
             image: "../images/swiper/swiper-3.jpg",
             caption: "描述文案3"
-        }]
+        }],
+        onSlideChange:function(){
+            $.alert("这个是左右切换的回调函数");
+            console.log("这个事切换的时候打印出来的");
+        },
+        onOpen:function(){
+            $.alert("这个是打开的时候的回调函数，可以设置从第几张照片开始的，不信你看代码");
+        },
+        onClose:function(){
+            $.alert("这个是关闭的时候的回调函数");
+        },
+        initIndex:2/*这个是设置从第几张开始轮播对应的图片*/
+
     });
     photoBrowser.open();
+
 
 
 </script>
