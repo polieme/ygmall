@@ -847,7 +847,39 @@
             <input class="weui-input" type="text"  placeholder="请选择中文日期" id="date-picker-cn">
         </div>
     </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">多选日期</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="这个是多选日期" id="date-picker-mulity">
+        </div>
+    </div>
+
 </div>
+
+<div style="margin: 35px 0">
+    <h1>内联日历</h1>
+</div>
+<div class="weui-cell">
+    <div class="weui-cell__hd">
+        <label class="weui-label">内联日期选择</label>
+    </div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="请选择日期" id="innerline-date">
+    </div>
+</div>
+<div id="date3"></div>
+
+<!--这块是Picker的代码-->
+<div style="margin: 35px 0">
+    <h1>Picker</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="picker.html">跳转Picker界面</a>
+</div>
+
+
 
 
 <script src="../js/jquery.min.js"></script>
@@ -1156,11 +1188,38 @@
       onDayClick	function (p, dayContainer, year, month, day)		Callback function that will be executed when user clicks/select any date
       onOpen	function (p)		Callback function that will be executed when picker is opened
       onClose	function (p)		Callback function that will be executed when picker is closed
+
+
+      方法
+
+        通过 $("xxx").calendar("methodname", args) 可以调用method的方法，目前有如下方法可以调用：
+
+        $("#input").calendar("close");  //关闭弹窗
+        $("#input").calendar("open");  //打开弹窗
+        $("#input").calendar("setValue", ["2012-12-12"]);  //设置日期
+        $("#input").calendar("destroy");  //销毁
     * */
     $("#date-picker").calendar();
     $("#date-picker-cn").calendar({
         dateFormat:'yyyy年mm月dd日'
     });
+    $("#date-picker-mulity").calendar({
+        value:['2017-11-15'],/*打开的时候，默认选择的日期*/
+        multiple:true,
+        inputReadOnly:true,
+        maxDate:'2017-11-17',
+        minDate:'2017-10-17',/*可以在这里设定日历的其他属性*/
+        onClose:function(){/*这个是回调函数*/
+            $.alert(1);
+        }
+    });
+    /*
+    *内联样式的日期选择
+    * */
+    $("#date3").calendar({
+        container:"#date3",
+        input:'#innerline-date'
+    })
 </script>
 </body>
 </html>
