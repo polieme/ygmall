@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 这个地方必须得引入，否则会出现页面可缩放的问题-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Picker</title>
+    <!-- weui的相关css样式，需要引入-->
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.min.css">
+
+
+    <style>
+        h1 {
+            font-weight: 400;
+            text-align: center;
+            color: #0bb20c;
+        }
+    </style>
+</head>
+<body>
+
+<div style="margin: 35px 0">
+    <h1>Picker的使用</h1>
+</div>
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">称呼</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="picker-call" placeholder="请选择您的名字">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">手机</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="请选择您的手机" id="chose-phone">
+        </div>
+    </div>
+</div>
+
+
+<!--内联显示选择-->
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">内联显示</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="请选择您的手机" id="chose-phone-innerline">
+        </div>
+    </div>
+    <div id="show-chose"></div>
+</div>
+
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-weui.min.js"></script>
+
+<script>
+    $("#picker-call").picker({
+        title: "请选择您的姓名",
+        cols: [{
+            textAlign: 'center',
+            values: ['赵', '钱', '孙', '李', '周', '张']
+        }, {
+            textAlign: 'center',
+            values: ['鹏', '松', '浩', '坤', '明']
+        }, {
+            textAligin: 'center',
+            values: ['先生', '女士']
+        }]
+    })
+
+    $("#chose-phone").picker({
+        title:"请选择您的手机",
+        cols:[{
+            textAlign:'center',
+            values:['iPhone4','iPhone4','iPhone4','iPhone4']
+        }]
+    })
+
+    $("#show-chose").picker({
+        input:'#chose-phone-innerline',
+        container:'#show-chose'
+    })
+</script>
+</body>
+</html>
