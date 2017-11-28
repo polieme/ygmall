@@ -77,17 +77,22 @@
     })
 
     $("#chose-phone").picker({
-        title:"请选择您的手机",
-        cols:[{
-            textAlign:'center',
-            values:['iPhone4','iPhone4','iPhone4','iPhone4']
+        title: "请选择您的手机",
+        cols: [{
+            textAlign: 'center',
+            values: ['iPhone4', 'iPhone4', 'iPhone4', 'iPhone4']
         }]
     })
 
     $("#show-chose").picker({
-        input:'#chose-phone-innerline',
-        container:'#show-chose'
+        input: '#chose-phone-innerline',
+        container: '#show-chose',
+        cols: [{
+            textAlign: 'center',
+            values: ['iPhone4', 'iPhone5', 'iPhone6', 'iPhone7']
+        }]
     })
+
 </script>
 </body>
 </html>
