@@ -33,14 +33,145 @@
             <input class="weui-input" type="text" id="datetime-picker">
         </div>
     </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">上午下午</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="datetime-picker-sx">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">定制时间</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="datetime-picker-zd">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">自定义格式</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="datetime-picker-zdygs">
+        </div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">限制年月</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="datetime-picker-limit">
+        </div>
+    </div>
 </div>
 
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">内联显示</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="datetime-picker-inline">
+        </div>
+    </div>
+</div>
+<div id="time-container"></div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery-weui.min.js"></script>
 
 <script>
-   $("#datetime-picker").datetimePicker();
+    $("#datetime-picker").datetimePicker();
+
+    /*上下午的代码*/
+    var dateNow = new Date();
+    dateNow = dateNow.getFullYear()+'-'+(dateNow.getMonth()+1)+'-'+dateNow.getDate();
+    $("#datetime-picker-sx").datetimePicker({
+        times: function () {
+            return [{values: ['上午', '下午']}];
+
+        },
+        value:dateNow+' 上午',
+        onChange:function(picker, values, displayValues){
+            console.log(values);
+        }
+    });
+
+    /*定制时间*/
+    $("#datetime-picker-zd").datetimePicker({
+        times:function(){
+            return [{values:['上午8点','下午2点','晚上8点']}];
+        },
+        max:'2013-11-29',
+        onChange:function(picker,values,displayValues){
+            console.log(values);
+        }
+
+    })
+
+
+    /*自定义格式的时间*/
+    $("#datetime-picker-zdygs").datetimePicker({
+        title: '自定义格式',
+        yearSplit: '年',
+        monthSplit: '月',
+        dateSplit: '日',
+        times: function () {
+            return [  // 自定义的时间
+                {
+                    values: (function () {
+                        var hours = [];
+                        for (var i=0; i<24; i++) hours.push(i > 9 ? i : '0'+i);
+                        return hours;
+                    })()
+                },
+                {
+                    divider: true,  // 这是一个分隔符
+                    content: '时'
+                },
+                {
+                    values: (function () {
+                        var minutes = [];
+                        for (var i=0; i<59; i++) minutes.push(i > 9 ? i : '0'+i);
+                        return minutes;
+                    })()
+                },
+                {
+                    divider: true,  // 这是一个分隔符
+                    content: '分'
+                }
+            ];
+        },
+        onChange: function (picker, values, displayValues) {
+            console.log(values);
+        }
+    });
+
+
+    /*限制年月*/
+    $("#datetime-picker-limit").datetimePicker({
+        title: '限定年月',
+        years: [2017, 2018],
+        monthes: ['06', '07'],
+        onChange: function (picker, values, displayValues) {
+            console.log(values);
+        }
+    });
+
+    /*内联样式显示*/
+    $("#datetime-picker-inline").datetimePicker({
+        container: '#time-container',
+        onChange: function (picker, values, displayValues) {
+            console.log(values);
+        }
+    })
+
+
 </script>
 </body>
 </html>
