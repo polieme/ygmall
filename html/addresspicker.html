@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 这个地方必须得引入，否则会出现页面可缩放的问题-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+    <!-- weui的相关css样式，需要引入-->
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.min.css">
+    <style>
+        h1{
+            font-weight: 300;
+            color: #0bb20c;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div style="margin: 35px auto">
+    <h1>City Picker</h1>
+</div>
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">发出地</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="city-picker">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">目的地</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="city-picker-onlycity">
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery-weui.min.js"></script>
+<script src="../js/city-picker.js"></script>
+
+<script>
+    $("#city-picker").cityPicker({
+        title: "选择出发地"
+    });
+
+    $("#city-picker-onlycity").cityPicker({
+        title:"请选择您要到达的城市",
+        showDistrict:false,
+        onChange:function(picker,values,displayValues){
+            console.log(values,displayValues)
+        }
+    })
+</script>
+</body>
+</html>
