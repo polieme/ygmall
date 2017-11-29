@@ -28,7 +28,7 @@
         }
 
         /*swiper轮播图*/
-        .swiper-container img{
+        .swiper-container img {
             width: 100%;
             height: 100%;
         }
@@ -806,13 +806,16 @@
 <div class="swiper-container swiper-container-horizontal">
     <div class="swiper-wrapper">
         <div class="swiper-slide">
-            <a href="http://idangero.us/swiper/api/#.VjtIEK4rLyU" target="_blank"><img src="../images/swiper/swiper-1.jpg" alt="暗藏玄机，看你是否能发现"></a>
+            <a href="http://idangero.us/swiper/api/#.VjtIEK4rLyU" target="_blank"><img
+                    src="../images/swiper/swiper-1.jpg" alt="暗藏玄机，看你是否能发现"></a>
         </div>
         <div class="swiper-slide">
-            <a href="http://idangero.us/swiper/api/#.VjtIEK4rLyU" target="_blank"><img src="../images/swiper/swiper-2.jpg" alt="暗藏玄机，看你是否能发现"></a>
+            <a href="http://idangero.us/swiper/api/#.VjtIEK4rLyU" target="_blank"><img
+                    src="../images/swiper/swiper-2.jpg" alt="暗藏玄机，看你是否能发现"></a>
         </div>
         <div class="swiper-slide">
-            <a href="http://idangero.us/swiper/api/#.VjtIEK4rLyU" target="_blank"><img src="../images/swiper/swiper-3.jpg" alt="暗藏玄机，看你是否能发现"></a>
+            <a href="http://idangero.us/swiper/api/#.VjtIEK4rLyU" target="_blank"><img
+                    src="../images/swiper/swiper-3.jpg" alt="暗藏玄机，看你是否能发现"></a>
         </div>
     </div>
 </div>
@@ -836,7 +839,7 @@
             <label class="weui-label">日期</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text"  placeholder="请选择日期" id="date-picker">
+            <input class="weui-input" type="text" placeholder="请选择日期" id="date-picker">
         </div>
     </div>
     <div class="weui-cell">
@@ -844,7 +847,7 @@
             <label class="weui-label">中文日期</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text"  placeholder="请选择中文日期" id="date-picker-cn">
+            <input class="weui-input" type="text" placeholder="请选择中文日期" id="date-picker-cn">
         </div>
     </div>
     <div class="weui-cell">
@@ -887,8 +890,53 @@
     <a class="weui-btn weui-btn_primary" href="datepicker.html">跳转日期时间选择页面</a>
 </div>
 
+<div style="margin: 35px auto">
+    <h1>地址选择器-City Picker</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="addresspicker.html">跳转地址选择界面</a>
+</div>
+
+<!--这块是通知-Notification的代码-->
+<div style="margin: 35px auto">
+    <h1>通知-Notification</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" id="showNotoficationBtn">显示通知</a>
+</div>
+<!--这块是通知-Notification的代码-->
+
+<!--Select 选择-->
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">职业</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="job-select">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">手机</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="phone-select">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">爱好</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="fav-select">
+        </div>
+    </div>
+
+</div>
 
 
+<!--Select 选择-->
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery-weui.min.js"></script>
@@ -1144,6 +1192,61 @@
         });
 
 
+        //Notification的JS代码
+        $("#showNotoficationBtn").on('click', function () {
+            $.notification({
+                title: "Baby",
+                text: "I miss you",
+                media: "<img src='http://jqweui.com/dist/demos/images/present.png'>",
+                data: "123",
+                time: 2000,//设置自动隐藏的时间
+                onClick: function (data) {//点击的时候的调取函数
+                    $.alert("Click" + data)
+                },
+                onClose: function (data) {//自动关闭的时候调取的函数
+                    $.alert("Close" + data);
+                }
+            })
+        });
+
+        $("#job-select").select({
+            title: "请选择您的职业",
+            items: ["法官", "码农", "医生", "猎人", "记者"]
+        })
+
+        $("#phone-select").select({
+            title: "请选择您的手机",
+            items: [
+                {
+                    title: "iPhone 3GS",
+                    value: "001"
+                },
+                {
+                    title: "iPhone 4",
+                    value: '002'
+                }, {
+                    title: 'iPhone4S',
+                    value: '003'
+                },{
+                    title: "iPhone 5",
+                    value: "004"
+                },
+                {
+                    title: "iPhone 5S",
+                    value: '005'
+                }, {
+                    title: 'iPhone6',
+                    value: '006'
+                }, {
+                    title: 'iPhone6S',
+                    value: '007'
+                }, {
+                    title: 'iPhone7',
+                    value: '008'
+                }
+            ]
+        })
+
     });
 
 </script>
@@ -1209,15 +1312,15 @@
     * */
     $("#date-picker").calendar();
     $("#date-picker-cn").calendar({
-        dateFormat:'yyyy年mm月dd日'
+        dateFormat: 'yyyy年mm月dd日'
     });
     $("#date-picker-mulity").calendar({
-        value:['2017-11-15'],/*打开的时候，默认选择的日期*/
-        multiple:true,
-        inputReadOnly:true,
-        maxDate:'2017-11-17',
-        minDate:'2017-10-17',/*可以在这里设定日历的其他属性*/
-        onClose:function(){/*这个是回调函数*/
+        value: ['2017-11-15'], /*打开的时候，默认选择的日期*/
+        multiple: true,
+        inputReadOnly: true,
+        maxDate: '2017-11-17',
+        minDate: '2017-10-17', /*可以在这里设定日历的其他属性*/
+        onClose: function () {/*这个是回调函数*/
             $.alert(1);
         }
     });
@@ -1225,8 +1328,8 @@
     *内联样式的日期选择
     * */
     $("#date3").calendar({
-        container:"#date3",
-        input:'#innerline-date'
+        container: "#date3",
+        input: '#innerline-date'
     })
 </script>
 </body>
