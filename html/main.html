@@ -907,6 +907,9 @@
 <!--这块是通知-Notification的代码-->
 
 <!--Select 选择-->
+<div style="margin: 35px auto">
+    <h1>Select-选择</h1>
+</div>
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__hd">
@@ -934,9 +937,28 @@
     </div>
 
 </div>
-
-
 <!--Select 选择-->
+
+<!--这块是Popup的代码-->
+<div style="margin: 35px auto">
+    <h1>Popup</h1>
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="popup.html">跳转Popup页面</a>
+</div>
+
+<!--fastclick代码-->
+<div style="margin: 35px auto">
+    <h1>fastclick</h1>
+</div>
+<div class="weui-article">
+    <p>iOS 系统下默认的 click 事件会有300毫秒的延迟，这个延迟是iOS系统的特性而不是jQuery WeUI设定的，可以使用 fastclick 来消除这个延迟。
+
+        jQuery WeUI 是不包含 fastclick 的，你只需要按照标准的用法引用并初始化即可，可以参考以下代码：
+        在官方 demos 中是引入了 fastclick ，可以参考其中的代码。
+
+        关于更多 fastclick 相关的文档，请移步其官网 https://github.com/ftlabs/fastclick</p>
+</div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery-weui.min.js"></script>
@@ -1209,6 +1231,7 @@
             })
         });
 
+        //
         $("#job-select").select({
             title: "请选择您的职业",
             items: ["法官", "码农", "医生", "猎人", "记者"]
@@ -1245,6 +1268,40 @@
                     value: '008'
                 }
             ]
+        })
+
+        $("#fav-select").select({
+            title: "您的爱好",
+            multi: true,
+            min:2,
+            max:3,
+            items: [
+                {
+                    title: "画画",
+                    value: 1
+                },
+                {
+                    title: "打球",
+                    value: 2
+                },
+                {
+                    title: "唱歌",
+                    value: 3
+                },
+                {
+                    title: "游泳",
+                    value: 4
+                },{
+                    title: "睡觉",
+                    value: 5
+                }
+            ],
+            beforeClose:function(values,titles){
+                if(values.indexOf("5")!= -1){
+                    $.toast("不能选择睡觉","cancel");
+                    return false;
+                }
+            }
         })
 
     });
